@@ -1,0 +1,2 @@
+# FSO2022-Full-Stack-Open-2022
+Este é o curso online aberto massivo (MOOC) gratuito da Universidade de Helsinque sobre Desenvolvimento Web .  Full Stack Open 2021: Aprenda React, Redux, Node.js, MongoDB, GraphQL e TypeScript de uma só vez! Este curso irá apresentá-lo ao desenvolvimento web moderno baseado em JavaScript. O foco principal é construir aplicativos de página única com ReactJS que usam APIs REST criadas com Node.js.  O curso é dividido em 12 partes.  Os presentes no repositório são minhas soluções para os exercícios.

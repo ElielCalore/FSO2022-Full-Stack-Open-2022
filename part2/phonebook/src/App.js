@@ -9,10 +9,13 @@ function App() {
   ]);
 
   const [newName, setNewName] = useState({ name: "", number: "" });
+  const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
     setNewName({ ...newName, [e.target.name]: e.target.value });
   };
+
+  const handleChangeSearch = (e) => setSearch(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,11 +39,24 @@ function App() {
       { number: newName.number },
     ]);
   };
-
+  // .filter((cur) => cur.name.toLowerCase().includes(search.toLowerCase()))
   return (
     <div>
       <h2>Phonebook</h2>
       <form>
+        <div>
+          filter shown with
+          <input
+            size="large"
+            value={search}
+            type="text"
+            placeholder="input search text"
+            onChange={handleChangeSearch}
+            enterButton
+          />
+        </div>
+
+        <h2>Add a new</h2>
         <div>
           name:{" "}
           <input
@@ -49,6 +65,8 @@ function App() {
             name="name"
             value={persons.name}
           />
+        </div>
+        <div>
           number:
           <input
             onChange={handleChange}
@@ -62,21 +80,20 @@ function App() {
             add
           </button>
         </div>
-        <div>
-          debug: {newName.name} {newName.number}
-        </div>
       </form>
       <h2>Numbers</h2>
 
-      {persons.map((currentElement) => {
-        return (
-          <div key={currentElement.name}>
-            <strong>
-              {currentElement.name} {currentElement.number}
-            </strong>
-          </div>
-        );
-      })}
+      {persons
+        .filter((cur) => cur.name.toLowerCase().includes(search.toLowerCase()))
+        .map((currentElement) => {
+          return (
+            <div key={currentElement.name}>
+              <strong>
+                {currentElement.name} {currentElement.number}
+              </strong>
+            </div>
+          );
+        })}
 
       {/*<ShowNote />*/}
     </div>

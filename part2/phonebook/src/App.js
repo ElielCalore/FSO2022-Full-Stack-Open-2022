@@ -11,10 +11,17 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(persons);
-    console.log(newName);
+
+    if (
+      persons.filter(
+        (currentName) =>
+          currentName.name.toLowerCase() === newName.toLowerCase()
+      ).length > 0
+    ) {
+      return alert(`${newName} is already added to phonebook`);
+    }
+
     setPersons([...persons, { name: newName }]);
-    console.log(persons);
   };
 
   return (
@@ -33,9 +40,8 @@ function App() {
       </form>
       <h2>Numbers</h2>
       {persons.map((currentElement) => {
-        console.log(persons.length);
         return (
-          <div>
+          <div key={currentElement.name}>
             <strong>{currentElement.name}</strong>
           </div>
         );

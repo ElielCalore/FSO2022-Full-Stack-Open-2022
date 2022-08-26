@@ -9,6 +9,7 @@ function App() {
   ]);
 
   const [newName, setNewName] = useState({ name: "", number: "" });
+
   const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
@@ -33,12 +34,10 @@ function App() {
       return alert(`${newName.number} is already added to phonebook`);
     }
 
-    setPersons([
-      ...persons,
-      { name: newName.name },
-      { number: newName.number },
-    ]);
+    setPersons([...persons, { name: newName.name, number: newName.number }]);
   };
+
+  console.log(persons);
   // .filter((cur) => cur.name.toLowerCase().includes(search.toLowerCase()))
   return (
     <div>

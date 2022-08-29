@@ -1,15 +1,12 @@
 /*import ShowNote from "./example/showNote/showNote";*/
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Filter from "./components/filter/filter";
 import AddNew from "./components/addNew/addNew";
 import Phonebooks from "./components/phonebook/phonebook";
-
-/////////////////////////////////////////Modificações á partir daqui
+import axios from "axios";
 
 function App() {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "999-999" },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState({ name: "", number: "" });
   const [search, setSearch] = useState("");
   const handleChange = (e) =>
@@ -31,11 +28,22 @@ function App() {
     }
     setPersons([...persons, { name: newName.name, number: newName.number }]);
   };
+
+  useEffect(() => {
+    const eventHandler = (response) => {
+      setPersons(response.data);
+    };
+
+    const promise = axios.get("http://localhost:3001/persons");
+    promise.then(eventHandler);
+  }, []);
+
   return (
     <div>
       <Phonebooks handleChangeSearch={handleChangeSearch} />
       <AddNew handleSubmit={handleSubmit} handleChange={handleChange} />
       <Filter persons={persons} search={search} />
+
       {/*<ShowNote />*/}
     </div>
   );

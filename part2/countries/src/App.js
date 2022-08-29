@@ -1,10 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import env from "react-dotenv";
 export function App() {
   const [countries, setCountries] = useState([]);
   const [search, SetSearch] = useState("");
   const [countriesSearch, setCountriesSearch] = useState(countries);
+  const [weather, setWeather] = useState({
+    current: {
+      temp_f: "",
+      condition: { icon: "" },
+      wind_mph: "",
+      wind_dir: "",
+    },
+  });
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  console.log(API_KEY);
 
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {

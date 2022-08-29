@@ -23,6 +23,10 @@ export function App() {
     console.log(countriesSearch);
   };
 
+  const buttonShow = (current) => {
+    setCountriesSearch([current]);
+  };
+
   return (
     <div>
       <div>
@@ -41,7 +45,16 @@ export function App() {
           countries.map((current) => {
             return (
               <div>
-                <h2>{current.name.common}</h2>
+                <h2>
+                  {current.name.common}{" "}
+                  <button
+                    onClick={() => {
+                      buttonShow(current);
+                    }}
+                  >
+                    Show
+                  </button>
+                </h2>
               </div>
             );
           })
@@ -81,7 +94,16 @@ country flag"
           countriesSearch.map((currentCountries) => {
             return (
               <div>
-                <h2>{currentCountries.name.common}</h2>
+                <h2>
+                  {currentCountries.name.common}
+                  <button
+                    onClick={() => {
+                      buttonShow(currentCountries);
+                    }}
+                  >
+                    Show
+                  </button>
+                </h2>
               </div>
             );
           })

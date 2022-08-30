@@ -1,10 +1,13 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import Display from "./components/Display";
 import env from "react-dotenv";
+
 export function App() {
+  const [search, setSearch] = useState({ name: "" });
   const [countries, setCountries] = useState([]);
-  const [search, SetSearch] = useState("");
-  const [countriesSearch, setCountriesSearch] = useState(countries);
+  const [singleCity, setSingleCity] = useState("");
+  const [countriesSearch, setCountriesSearch] = useState([]);
   const [weather, setWeather] = useState({
     current: {
       temp_f: "",
@@ -13,112 +16,51 @@ export function App() {
       wind_dir: "",
     },
   });
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  console.log(API_KEY);
 
   useEffect(() => {
-    axios.get("https://restcountries.com/v3.1/all").then((response) => {
-      setCountries(response.data);
-    });
+    async function fetchCountries() {
+      try {
+        const response = await axios.get("https://restcountries.com/v3.1/all");
+        setCountries(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchCountries();
   }, []);
 
-  const handleChangeSearch = (e) => {
-    SetSearch(e.target.value);
-
+  function handleChange(event) {
+    setSearch({ ...search, [event.target.name]: event.target.value });
     setCountriesSearch(
-      countries.filter((current) =>
-        current.name.common.toLowerCase().includes(search.toLowerCase())
+      countries.filter((country) =>
+        country.name.common.toLowerCase().includes(search.name.toLowerCase())
       )
     );
-    console.log(countriesSearch);
-  };
+  }
 
-  const buttonShow = (current) => {
-    setCountriesSearch([current]);
-  };
+  console.log(weather);
 
   return (
-    <div>
-      <div>
-        Find Countries
+    <div className="App">
+      <form>
+        <label>Find countries </label>
         <input
-          size="large"
+          name="name"
           type="text"
-          placeholder="input search text"
-          onChange={handleChangeSearch}
-          enterButton
+          onChange={(event) => {
+            handleChange(event);
+          }}
         />
-      </div>
+      </form>
 
-      <div>
-        {countriesSearch.length === 0 ? (
-          countries.map((current) => {
-            return (
-              <div>
-                <h2>
-                  {current.name.common}{" "}
-                  <button
-                    onClick={() => {
-                      buttonShow(current);
-                    }}
-                  >
-                    Show
-                  </button>
-                </h2>
-              </div>
-            );
-          })
-        ) : countriesSearch.length === 1 ? (
-          countriesSearch.map((cur) => {
-            let objKeys = Object.keys(countriesSearch[0].languages);
-
-            return (
-              <div>
-                <h1>{cur.name.common}</h1>
-                <p>
-                  <strong>Capital:</strong> {cur.capital}
-                </p>
-                <p>
-                  <strong>Area:</strong> {cur.area}
-                </p>
-                <p>
-                  <strong>Population:</strong> {cur.population}
-                </p>
-                <h2>Languages: </h2>
-                <ul>
-                  {objKeys.map((curObject) => {
-                    return <li>{countriesSearch[0].languages[curObject]}</li>;
-                  })}
-                </ul>
-                <img
-                  src={cur.flags.png}
-                  alt="
-country flag"
-                ></img>
-              </div>
-            );
-          })
-        ) : countriesSearch.length > 10 ? (
-          <div>Too Many matches, specify another filter</div>
-        ) : (
-          countriesSearch.map((currentCountries) => {
-            return (
-              <div>
-                <h2>
-                  {currentCountries.name.common}
-                  <button
-                    onClick={() => {
-                      buttonShow(currentCountries);
-                    }}
-                  >
-                    Show
-                  </button>
-                </h2>
-              </div>
-            );
-          })
-        )}
-      </div>
+      <Display
+        countriesSearch={countriesSearch}
+        setCountriesSearch={setCountriesSearch}
+        setWeather={setWeather}
+        weather={weather}
+        singleCity={singleCity}
+        setSingleCity={setSingleCity}
+      />
     </div>
   );
 }

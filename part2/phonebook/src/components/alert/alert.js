@@ -4,6 +4,8 @@ export function Alert({ message }) {
     background: "lightgrey",
     font_size: 20,
     border_style: "solid",
+    border_color: "blue",
+    border_with: 4,
     border_radius: 5,
     padding: 10,
     margin_bottom: 10,
@@ -15,6 +17,7 @@ export function Alert({ message }) {
     font_size: 20,
     border_style: "solid",
     border_radius: 5,
+    border_color: "yellow",
     padding: 10,
     margin_bottom: 10,
   };

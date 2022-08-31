@@ -36,7 +36,13 @@ function App() {
         const idToUpdate = filter[0].id;
         setAdd({ name: newName.name, number: newName.number, id: idToUpdate });
         setPersons([...persons, newName]);
-        services.update(add);
+        services.update(add).catch((err) => {
+          console.log(err);
+          setMessage(`[ERROR] ${newName.name} was already Update from server`);
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000);
+        });
 
         setMessage(`Update ${newName.name} was successfully`);
         setTimeout(() => {
@@ -56,7 +62,13 @@ function App() {
 
     //setAdd({ name: newName.name, number: newName.number });
     setPersons([...persons, newName]);
-    services.create(newName);
+    services.create(newName).catch((err) => {
+      console.log(err);
+      setMessage(`[ERROR] ${newName.name} was already created from server`);
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    });
 
     setMessage(`Added ${newName.name} was successfully`);
     setTimeout(() => {
@@ -74,7 +86,13 @@ function App() {
     {
       services
         .remove(id)
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err);
+          setMessage(`[ERROR] ${newName.name} was already deleted from server`);
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000);
+        })
         .then(setPersons(persons.filter((person) => person.id !== id)));
 
       setMessage(`Deleted ${newName.name} was successfully`);

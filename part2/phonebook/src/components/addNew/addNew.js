@@ -1,5 +1,4 @@
 const AddNew = ({ handleChange, handleSubmit }) => {
-  console.log("");
   return (
     <div>
       <form>

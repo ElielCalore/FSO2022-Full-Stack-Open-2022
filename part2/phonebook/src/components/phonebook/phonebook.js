@@ -1,5 +1,4 @@
 const Phonebooks = ({ handleChangeSearch }) => {
-  console.log("");
   return (
     <div>
       <form>

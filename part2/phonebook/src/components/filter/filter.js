@@ -1,5 +1,4 @@
 const Filter = ({ persons, search, remove }) => {
-  console.log("");
   return (
     <div>
       <h2>Numbers</h2>

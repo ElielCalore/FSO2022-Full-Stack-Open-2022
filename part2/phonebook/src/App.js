@@ -11,7 +11,7 @@ function App() {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState({ name: "", number: "" });
   const [search, setSearch] = useState("");
-  const [add, setAdd] = useState({ name: "", number: "" });
+  const [add, setAdd] = useState({ name: "", number: "", id: 0 });
   const [message, setMessage] = useState(null);
 
   const handleChange = (e) =>
@@ -34,8 +34,11 @@ function App() {
           (currentName) => currentName.name === newName.name
         );
         const idToUpdate = filter[0].id;
+        console.log(newName);
+
         setAdd({ name: newName.name, number: newName.number, id: idToUpdate });
         setPersons([...persons, newName]);
+
         services.update(add).catch((err) => {
           console.log(err);
           setMessage(`[ERROR] ${newName.name} was already Update from server`);

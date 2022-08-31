@@ -14,14 +14,29 @@ function App() {
 
   const handleChange = (e) =>
     setNewName({ ...newName, [e.target.name]: e.target.value });
+
   const handleChangeSearch = (e) => setSearch(e.target.value);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
       persons.filter((currentName) => currentName.name === newName.name)
         .length > 0
     ) {
-      return alert(`${newName.name} is already added to phonebook`);
+      alert(
+        `${newName.name} is already added to phonebook, replace the old number with a new one?`
+      );
+      {
+        let filter = persons.filter(
+          (currentName) => currentName.name === newName.name
+        );
+        const idToUpdate = filter[0].id;
+
+        setAdd({ name: newName.name, number: newName.number, id: idToUpdate });
+
+        services.update(add);
+        return services.getAll().then((initialLoad) => setPersons(initialLoad));
+      }
     }
     if (
       persons.filter((currentName) => currentName.number === newName.number)
@@ -40,7 +55,7 @@ function App() {
 
   const remove = (id, name) => {
     console.log(id);
-    if (window.alert(`Do you want to delete ${name} from your phonebook? `));
+    if (alert(`Do you want to delete ${name} from your phonebook? `));
     {
       services
         .remove(id)

@@ -4,6 +4,7 @@ import Filter from "./components/filter/filter";
 import AddNew from "./components/addNew/addNew";
 import Phonebooks from "./components/phonebook/phonebook";
 import axios from "axios";
+import services from "./services/services";
 
 function App() {
   const [persons, setPersons] = useState([]);
@@ -30,31 +31,11 @@ function App() {
     }
     setPersons([...persons, { name: newName.name, number: newName.number }]);
     setAdd({ name: newName.name, number: newName.number });
+    services.create(add);
   };
-  useEffect(() => {
-    async function addNewPerson() {
-      try {
-        if (newName.name.length > 0 && newName.number.length > 0) {
-          const response = await axios.post(
-            "http://localhost:3001/persons",
-            add
-          );
-          console.log(response);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    addNewPerson();
-  }, [add]);
 
   useEffect(() => {
-    const eventHandler = (response) => {
-      setPersons(response.data);
-    };
-
-    const promise = axios.get("http://localhost:3001/persons");
-    promise.then(eventHandler);
+    services.getAll().then((initialLoad) => setPersons(initialLoad));
   }, []);
 
   return (

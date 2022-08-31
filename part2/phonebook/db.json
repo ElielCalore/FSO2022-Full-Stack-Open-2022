@@ -1,34 +1,33 @@
 {
-  "persons": [
-    {
-      "name": "Arto Hellas",
-      "number": "040-123456",
-      "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
-      "name": "Eliel dos Santos Calore",
-      "number": "055-62-998055833",
-      "id": 5
-    },
-    {
-      "name": "Karla Jordana Rios Silva Calore",
-      "number": "055-62-999999999",
-      "id": 6
-    }
-  ]
+    "persons": [{
+            "name": "Arto Hellas",
+            "number": "040-123456",
+            "id": 1
+        },
+        {
+            "name": "Ada Lovelace",
+            "number": "39-44-5323523",
+            "id": 2
+        },
+        {
+            "name": "Dan Abramov",
+            "number": "12-43-234345",
+            "id": 3
+        },
+        {
+            "name": "Mary Poppendieck",
+            "number": "39-23-6423122",
+            "id": 4
+        },
+        {
+            "name": "Eliel dos Santos Calore",
+            "number": "055-62-998055833",
+            "id": 5
+        },
+        {
+            "name": "Karla Jordana Rios Silva Calore",
+            "number": "055-62-999999999",
+            "id": 6
+        }
+    ]
 }

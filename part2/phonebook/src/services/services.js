@@ -8,6 +8,7 @@ const getAll = () => {
 };
 
 const create = (newObject) => {
+  console.log(`new object ${newObject.id}`);
   const request = axios.post(baseUrl, newObject);
   return request.then((response) => response.data);
 };

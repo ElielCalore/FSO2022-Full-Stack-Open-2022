@@ -1,4 +1,4 @@
-const Filter = ({ persons, search }) => {
+const Filter = ({ persons, search, remove }) => {
   console.log("");
   return (
     <div>
@@ -10,6 +10,12 @@ const Filter = ({ persons, search }) => {
             <div key={currentElement.name}>
               <strong>
                 {currentElement.name} {currentElement.number}
+                <button
+                  className="btn btn-danger"
+                  onClick={() => remove(currentElement.id, currentElement.name)}
+                >
+                  delete
+                </button>
               </strong>
             </div>
           );

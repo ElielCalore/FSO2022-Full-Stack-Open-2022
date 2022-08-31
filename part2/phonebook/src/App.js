@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Filter from "./components/filter/filter";
 import AddNew from "./components/addNew/addNew";
 import Phonebooks from "./components/phonebook/phonebook";
-import axios from "axios";
+//import axios from "axios";
 import services from "./services/services";
 
 function App() {
@@ -38,11 +38,22 @@ function App() {
     services.getAll().then((initialLoad) => setPersons(initialLoad));
   }, []);
 
+  const remove = (id, name) => {
+    console.log(id);
+    if (window.alert(`Do you want to delete ${name} from your phonebook? `));
+    {
+      services
+        .remove(id)
+        .catch((err) => console.log(err))
+        .then(setPersons(persons.filter((person) => person.id !== id)));
+    }
+  };
+
   return (
     <div>
       <Phonebooks handleChangeSearch={handleChangeSearch} />
       <AddNew handleSubmit={handleSubmit} handleChange={handleChange} />
-      <Filter persons={persons} search={search} />
+      <Filter persons={persons} search={search} remove={remove} />
 
       {/*<ShowNote />*/}
     </div>

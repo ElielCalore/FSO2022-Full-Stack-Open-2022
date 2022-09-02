@@ -39,13 +39,19 @@ app.delete("/api/persons/:id", (request, response) => {
 });
 
 app.post("/api/persons", (request, response) => {
-  const maxId =
-    persons.length > 0 ? Math.max(...persons.map((current) => current.id)) : 0;
-
   const person = request.body;
+  if (person.name.length === 0 || person.number.length === 0) {
+    return response
+      .status(404)
+      .json({ message: "The name or number is missing" });
+  }
+  const filter = persons.filter((current) => current.name === person.name);
+  if (filter.length === 1) {
+    return response.status(404).json({ message: "Name best Unique" });
+  }
   person.id = Math.floor(Math.random() * 10000);
   persons[persons.length] = person;
-  response.json(persons);
+  return response.json(persons);
 });
 
 app.listen(3001, () => {

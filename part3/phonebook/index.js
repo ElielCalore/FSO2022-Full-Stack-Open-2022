@@ -14,8 +14,17 @@ app.get("/info", (request, response) => {
     date: new Date(),
     howMany: `Phonebook has info for ${persons.length} people `,
   };
-
   return response.status(200).json(date);
+});
+
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const filter = persons.find((currentPerson) => currentPerson.id === id);
+  if (filter) {
+    return response.status(200).json(filter);
+  } else {
+    return response.status(404).end();
+  }
 });
 
 app.listen(3001, () => {

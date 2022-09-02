@@ -27,6 +27,17 @@ app.get("/api/persons/:id", (request, response) => {
   }
 });
 
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const filter = persons.filter((currentPerson) => currentPerson.id === id);
+  if (filter) {
+    persons.splice(filter[0].id - 1, filter[0].id);
+    return response.status(200).json(persons);
+  } else {
+    return response.status(404).end;
+  }
+});
+
 app.listen(3001, () => {
   console.log("Server up at port: ", process.env.PORT);
 });

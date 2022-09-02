@@ -38,6 +38,16 @@ app.delete("/api/persons/:id", (request, response) => {
   }
 });
 
+app.post("/api/persons", (request, response) => {
+  const maxId =
+    persons.length > 0 ? Math.max(...persons.map((current) => current.id)) : 0;
+
+  const person = request.body;
+  person.id = Math.floor(Math.random() * 10000);
+  persons[persons.length] = person;
+  response.json(persons);
+});
+
 app.listen(3001, () => {
   console.log("Server up at port: ", process.env.PORT);
 });

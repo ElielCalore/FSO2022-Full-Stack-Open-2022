@@ -6,7 +6,10 @@ const moment = require("moment");
 const path = require("path");
 const fs = require("fs");
 const persons = require("./db.json");
+const cors = require("cors");
+require("dotenv").config();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 const log = fs.createWriteStream(
@@ -68,6 +71,6 @@ app.post("/api/persons", (request, response) => {
   return response.json(persons);
 });
 
-app.listen(3001, () => {
+app.listen(Number(process.env.PORT), () => {
   console.log("Server up at port: ", process.env.PORT);
 });

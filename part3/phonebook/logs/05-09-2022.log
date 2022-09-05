@@ -1,0 +1,63 @@
+
+Request: GET /api/persons at Mon Sep 05 2022 13:27:52 GMT-0300, IP: ::1, User Agent: PostmanRuntime/7.29.2
+Response Body:
+[
+	{
+		"id": 1,
+		"name": "Arto Hellas",
+		"number": "040-123456"
+	},
+	{
+		"id": 2,
+		"name": "Ada Lovelace",
+		"number": "39-44-5323523"
+	},
+	{
+		"id": 3,
+		"name": "Dan Abramov",
+		"number": "12-43-234345"
+	},
+	{
+		"id": 4,
+		"name": "Mary Poppendieck",
+		"number": "39-23-6423122"
+	}
+]
+Response: 200 3.080 ms 
+
+Request: POST /api/persons at Mon Sep 05 2022 13:28:20 GMT-0300, IP: ::1, User Agent: PostmanRuntime/7.29.2
+Request Body:
+{
+	"id": 443,
+	"name": "Eliel",
+	"number": "9985-5833"
+}
+Response Body:
+[
+	{
+		"id": 1,
+		"name": "Arto Hellas",
+		"number": "040-123456"
+	},
+	{
+		"id": 2,
+		"name": "Ada Lovelace",
+		"number": "39-44-5323523"
+	},
+	{
+		"id": 3,
+		"name": "Dan Abramov",
+		"number": "12-43-234345"
+	},
+	{
+		"id": 4,
+		"name": "Mary Poppendieck",
+		"number": "39-23-6423122"
+	},
+	{
+		"id": 443,
+		"name": "Eliel",
+		"number": "9985-5833"
+	}
+]
+Response: 200 0.586 ms 

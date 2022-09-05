@@ -1,9 +1,23 @@
-const { json, response } = require("express");
 const express = require("express");
 const app = express();
+const morganBody = require("morgan-body");
+const bodyParser = require("body-parser");
+const moment = require("moment");
+const path = require("path");
+const fs = require("fs");
 const persons = require("./db.json");
 
-app.use(express.json());
+app.use(bodyParser.json());
+
+const log = fs.createWriteStream(
+  path.join(__dirname, "./logs", `${moment().format("DD-MM-YYYY")}.log`),
+  { flags: "a" }
+);
+
+morganBody(app, {
+  noColors: true,
+  stream: log,
+});
 
 app.get("/api/persons", (request, response) => {
   return response.status(200).json(persons);

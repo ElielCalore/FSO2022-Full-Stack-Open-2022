@@ -61,3 +61,18 @@ Response Body:
 	}
 ]
 Response: 200 0.586 ms 
+
+Request: GET / at Mon Sep 05 2022 18:10:26 GMT-0300, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+Response: 404 8.619 ms 
+
+Request: GET /persons at Mon Sep 05 2022 18:11:47 GMT-0300, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+Response: 404 7.878 ms 
+
+Request: GET /favicon.ico at Mon Sep 05 2022 18:11:47 GMT-0300, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+Response: 404 2.173 ms 
+
+Request: GET /persons at Mon Sep 05 2022 18:11:52 GMT-0300, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+Response: 404 0.896 ms 
+
+Request: GET /favicon.ico at Mon Sep 05 2022 18:11:52 GMT-0300, IP: ::1, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+Response: 404 2.462 ms 

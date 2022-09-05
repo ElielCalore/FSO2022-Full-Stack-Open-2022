@@ -9,6 +9,7 @@ const persons = require("./db.json");
 const cors = require("cors");
 require("dotenv").config();
 
+app.use(express.static("build"));
 app.use(cors());
 app.use(bodyParser.json());
 

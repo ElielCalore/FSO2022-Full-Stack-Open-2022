@@ -1,7 +1,8 @@
-const listLikes = require('../utils/totalLikes').totalLikes
+const listLikes = require('../utils/totalLikes_testing').totalLikes
+const listFavorite = require('../utils/favorite_testing').favorite
 
 
-describe('total likes', () => {
+describe('total likes: ', () => {
   const listWithOneBlog = [
     {
       _id: '5a422aa71b54a676234d17f8',
@@ -64,6 +65,39 @@ describe('total likes', () => {
     }  
   ]
 
+  const blogsF = [
+    {
+      title: "React patterns",
+      author: "Michael Chan",
+      likes: 7
+    },
+    {
+      title: "Go To Statement Considered Harmful",
+      author: "Edsger W. Dijkstra",
+      likes: 5
+    },
+    {
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      likes: 12
+    },
+    {
+      title: "First class tests",
+      author: "Robert C. Martin",
+      likes: 10
+    },
+    {
+      title: "TDD harms architecture",
+      author: "Robert C. Martin",
+      likes: 0
+    },
+    {
+      title: "Type wars",
+      author: "Robert C. Martin",
+      likes: 2
+    }  
+  ]
+
   test('when list has only one blog, equals the likes of that', () => {
     const result = listLikes(listWithOneBlog)
     expect(result).toBe(5)
@@ -72,5 +106,14 @@ describe('total likes', () => {
   test('when list has more then one blog, equals the likes of that', () => {
     const result = listLikes(blogs)
     expect(result).toBe(36)
+  })
+
+  test('when list has more then one blog, equals the likes of that', () => {
+    const result = listFavorite(blogsF)
+    expect(result).toEqual([{
+      title: "Canonical string reduction",
+      author: "Edsger W. Dijkstra",
+      likes: 12
+    }])
   })
 })

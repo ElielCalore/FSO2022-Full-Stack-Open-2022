@@ -1,6 +1,6 @@
 const listLikes = require('../utils/totalLikes_testing').totalLikes
 const listFavorite = require('../utils/favorite_testing').favorite
-
+const listMost = require('../utils/mostBlog.testing').most
 
 describe('total likes: ', () => {
   const listWithOneBlog = [
@@ -98,6 +98,22 @@ describe('total likes: ', () => {
     }  
   ]
 
+  const blogsM = [
+    {
+      author: "Michael Chan",
+      blogs: 7
+    },
+    {
+      author: "Edsger W. Dijkstra",
+      blogs: 17
+    },    
+    {
+      author: "Robert C. Martin",
+      blogs: 12
+    }
+     
+  ]
+
   test('when list has only one blog, equals the likes of that', () => {
     const result = listLikes(listWithOneBlog)
     expect(result).toBe(5)
@@ -115,5 +131,14 @@ describe('total likes: ', () => {
       author: "Edsger W. Dijkstra",
       likes: 12
     }])
+
+    test('when the author has more than one blog, it is equal to this one', () => {
+      const result =  listMost(blogsM)
+      expect(result).toEqual({
+      author: "Edsger W. Dijkstra",
+      blogs: 12
+      })
+    })
+    
   })
 })

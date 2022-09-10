@@ -1,7 +1,70 @@
+const mongoose = require("mongoose")
+const supertest = require("supertest")
+const app = require("../index")
+const Blog = require("../models/blog.model")
+
+const api = supertest(app)
+
+
+describe('Async/await test', () => {
+  test("GET route and JSON tests - exercise 4.8", async () => {
+    await api.get("/blogs/read")
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+})
+
+  test("The unique identifier property is named id - exercise 4.9*", async () => {
+    const blogs = await Blog.find({});
+    expect(blogs[0]._id).toBeDefined()
+  })
+
+  test("POST route test - exercise 4.10", async () => {
+    const newPost = {
+        title: "test",
+        author: "test",
+        url: "test",
+        likes: 50
+    }
+    await (await api.post("/blogs/create")).send(newPost).expect(201)
+  })
+
+  test('If likes, title or url are missing, respond with 400 bad request - exercises 4.11*, 4.12*', async () => {
+    const newBlog = {
+      author:"Eliel",
+      likes: 15
+    }
+
+    await api
+      .post('/blogs/create')
+      .send(newBlog)
+      .expect(400)
+  }, 90000)
+
+  test("Delete route test- exercise 4.13*", async () => {
+    const blogs = await Blog.find({});
+    await api.delete(blogs[0]._id);
+    expect(201)
+  })
+
+  test("Update route test - exercise 4.14", async () => {
+    const blogs = await blogs.findOneAndUpdate({
+      author:"Eliel",
+      likes: 15
+    }).expect(201)
+
+
+  })
+
+
+  
+})
+
+/*
 const listLikes = require('../utils/totalLikes_testing').totalLikes
 const listFavorite = require('../utils/favorite_testing').favorite
 const listMost = require('../utils/mostBlog.testing').most
-
+*/
+/*
 describe('total likes: ', () => {
   const listWithOneBlog = [
     {
@@ -140,5 +203,7 @@ describe('total likes: ', () => {
       })
     })
     
+    
   })
 })
+*/

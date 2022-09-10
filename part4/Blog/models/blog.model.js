@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
-const {Schema, model} = require("mongoose");
+const {Schema, model, Types} = require("mongoose");
 
 const BlogSchema = new Schema({
     title: {type: String},
-    author: {type: String},
+    author: {type: Types.ObjectId, ref:"User"},
     url: {type: String},
     likes: {type: Number}
 });

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/user.model");
 const {req, res} = require("express");
+const generateToken = require("../config/jwt.config");
 
 const saltRounds = 10;
 
@@ -21,7 +22,7 @@ router.post("/sign-up", async (req, res) => {
     }
 
     const salt = await bcrypt.genSalt(saltRounds);
-    console.log(salt);
+    
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const user = await UserModel.create({
@@ -37,5 +38,36 @@ router.post("/sign-up", async (req, res) => {
     return res.status(500).json(err);
   }
 });
+
+router.post("/login", async (req, res) =>{
+  try{
+    const {username, password} = req.body;
+    const user = await UserModel.findOne({username: username});
+
+    if(!user){
+      return res.status(400).json({message : "E-mail não cadastrado"});
+    }
+
+    if(await bcrypt.compare(password, user.passwordHash)){
+      delete user._doc.passwordHash;
+      const token = generateToken(user);
+
+      return res.status(200).json({
+        user: {...user._doc},
+        token: token,
+      });
+    } else{
+      return res.status(401).json({message: "username ou senha não correspondem"});
+    }
+
+  }catch(error){
+    console.error(error);
+    return res.status(500).json(error);
+  }
+
+
+
+
+})
 
 module.exports = router;

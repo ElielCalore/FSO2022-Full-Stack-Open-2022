@@ -17,21 +17,26 @@ router.get("/read", async (request, response) => {
 
 router.post("/create", isAuth, attachCurrentUser,  async (request, response) =>{
     try{
-
         const loggedInUser = request.currentUser._id;
-        
-
         const createBlog = await BlogModel.create({...request.body, author: loggedInUser});
-
         await UserModel.findOneAndUpdate( {_id: loggedInUser} , {$push: {blogs: createBlog._id}}, {new:true});
-
-        
-        
-
         return response.status(201).json(createBlog);
     }catch(error){
         return response.status(500).json({error: error.message})
     }
 })
+
+    router.delete("/delete/:id" , isAuth, attachCurrentUser, async (request, response) =>{
+        const {id} = request.params;
+        const loggedInUser = request.currentUser._id;
+        
+        try{
+            const deleteBlog = await BlogModel.findOneAndDelete({_id: id});
+            await UserModel.findOneAndUpdate( {_id: loggedInUser}, {$pull: {blogs: loggedInUser}}, {new: true});
+            return response.status(201).json(deleteBlog);
+        }catch(error){
+            return response.status(500).json({error: error.message})
+        }
+    })
 
 module.exports = router;

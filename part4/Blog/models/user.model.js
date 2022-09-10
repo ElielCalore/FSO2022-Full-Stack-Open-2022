@@ -2,9 +2,9 @@ const mongoose = require("mongoose")
 const {Schema, model} = require("mongoose")
 
 const UserSchema = new Schema ({
-    username: {type:String, required:true, trim: true},
-    name: {type: String, required: true, trim:true},
-    passwordHash: {type: String, required:true, trim:true}
+    username: {type:String, required:true, trim: true },
+    name: {type: String, required: true, trim:true, minLength: 3},
+    passwordHash: {type: String, required:true, trim:true, minLength: 3}
 })
 
 const UserModel = model("User", UserSchema);

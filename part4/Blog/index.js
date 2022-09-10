@@ -8,6 +8,9 @@ require('dotenv').config();
 app.use(express.json());
 app.use(cors());
 
+const UserRouter = require("./controllers/user.router");
+app.use("/user", UserRouter);
+
 const BlogRouter = require("./controllers/blog.router");
 app.use("/blog", BlogRouter);
 
